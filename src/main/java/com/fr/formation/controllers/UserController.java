@@ -3,6 +3,7 @@ package com.fr.formation.controllers;
 import com.fr.formation.dtos.UserCreateDto;
 import com.fr.formation.dtos.UserUpdateDto;
 import com.fr.formation.dtos.UserGetIdDto;
+import com.fr.formation.dtos.UserDeleteDto;
 import com.fr.formation.services.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +11,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/users")
+
 public class UserController {
 
     private final UserService service;
@@ -41,5 +43,10 @@ public class UserController {
     @GetMapping("/{id}")
     protected void getUserId(@PathVariable(value = "id") Long id, @Valid @RequestBody UserGetIdDto user) {
     	service.getUserId(user, id);
+    }
+    
+    @DeleteMapping("/{id}")
+    protected void deleteUserId(@PathVariable(value = "id") Long id, @Valid @RequestBody UserDeleteDto user) {
+    	service.delete(user, id);
     }
 }
